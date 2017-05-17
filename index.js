@@ -1,4 +1,9 @@
-let lat, lon, weather, locality;
+let lat,
+    lon,
+    weather,
+    locality,
+    fahrenheit,
+    celcius;
 const key = '2c9b6c5080e338af6c6a2f49707dd592';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com';
 const apiUrl = 'https://api.darksky.net/forecast';
@@ -26,8 +31,11 @@ navigator.geolocation.getCurrentPosition((position) => {
         .then((response) => response.json()
             .then((data) => {
                 weather = data;
+                fahrenheit = Math.round(weather.currently.temperature);
+                celcius = Math.round((fahrenheit - 32) * 0.5556);
+                console.log(celcius);
                 console.log(weather);
-                document.getElementById('temperature').innerHTML = Math.round(weather.currently.apparentTemperature);
+                document.getElementById('temperature').innerHTML = fahrenheit;
                 document.getElementById('weather').innerHTML = weather.currently.summary;
                 icons.add('icon', weather.currently.icon);
             }))
@@ -37,7 +45,17 @@ navigator.geolocation.getCurrentPosition((position) => {
             .then((data) => {
                 locality = data;
                 console.log(locality.results);
-                document.getElementById('location').innerHTML = `${locality.results[0].address_components[2].long_name}, ${locality.results[0].address_components[4].long_name}, ${locality.results[0].address_components[5].short_name}`;
+                document.getElementById('location').innerHTML = `${locality.results[0].address_components[2].long_name}, ${locality.results[0].address_components[5].short_name}`;
             }));
 });
 
+function toggleTemperature() {
+    console.log('yeahhhhh');
+    let unit = document.getElementById('unit');
+    if(unit.innerHTML === 'F')
+        console.log('yeahhhhh');
+}
+
+const temperatureElement = document.getElementById('unit');
+if(temperatureElement)
+    document.getElementById('unit').addEventListener('click', toggleTemperature, false);
