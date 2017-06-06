@@ -3,7 +3,7 @@ let lat,
     weather,
     locality,
     fahrenheit,
-    celcius;
+    celsius;
 const key = '2c9b6c5080e338af6c6a2f49707dd592';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com';
 const apiUrl = 'https://api.darksky.net/forecast';
@@ -32,8 +32,8 @@ navigator.geolocation.getCurrentPosition((position) => {
             .then((data) => {
                 weather = data;
                 fahrenheit = Math.round(weather.currently.temperature);
-                celcius = Math.round((fahrenheit - 32) * 0.5556);
-                console.log(celcius);
+                celsius = Math.round((fahrenheit - 32) * 0.5556);
+                console.log(celsius);
                 console.log(weather);
                 document.getElementById('temperature').innerHTML = fahrenheit;
                 document.getElementById('weather').innerHTML = weather.currently.summary;
@@ -56,6 +56,11 @@ function toggleTemperature() {
         console.log('yeahhhhh');
 }
 
-const temperatureElement = document.getElementById('unit');
-if(temperatureElement)
-    document.getElementById('unit').addEventListener('click', toggleTemperature, false);
+$(document).ready(() => {
+    const $unitToggle = $('#unit');
+    const $tempatureEl = $('#temperature');
+    $unitToggle.click(() => {
+        $tempatureEl.text() == celsius ? $tempatureEl.text(fahrenheit) : $tempatureEl.text(celsius);
+        $unitToggle.text() == 'C' ? $unitToggle.text('F') : $unitToggle.text('C');
+    });
+});
