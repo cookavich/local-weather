@@ -8,20 +8,6 @@ const key = '2c9b6c5080e338af6c6a2f49707dd592';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com';
 const apiUrl = 'https://api.darksky.net/forecast';
 
-let icons = new Skycons({'color': 'black'});
-icons.set({
-    "clear-day": Skycons.CLEAR_DAY,
-    "clear-night": Skycons.CLEAR_NIGHT,
-    "partly-cloudy-day": Skycons.PARTLY_CLOUDY_DAY,
-    "partly-cloudy-night": Skycons.PARTLY_CLOUDY_NIGHT,
-    "cloudy": Skycons.CLOUDY,
-    "rain": Skycons.RAIN,
-    "sleet": Skycons.SLEET,
-    "snow": Skycons.SNOW,
-    "wind": Skycons.WIND,
-    "fog": Skycons.FOG
-});
-icons.play();
 
 navigator.geolocation.getCurrentPosition((position) => {
     lat = position.coords.latitude;
@@ -49,18 +35,16 @@ navigator.geolocation.getCurrentPosition((position) => {
             }));
 });
 
-function toggleTemperature() {
-    console.log('yeahhhhh');
-    let unit = document.getElementById('unit');
-    if(unit.innerHTML === 'F')
-        console.log('yeahhhhh');
-}
 
 $(document).ready(() => {
     const $unitToggle = $('#unit');
     const $tempatureEl = $('#temperature');
     $unitToggle.click(() => {
-        $tempatureEl.text() == celsius ? $tempatureEl.text(fahrenheit) : $tempatureEl.text(celsius);
-        $unitToggle.text() == 'C' ? $unitToggle.text('F') : $unitToggle.text('C');
+        $tempatureEl.text() == celsius
+            ? $tempatureEl.text(fahrenheit)
+            : $tempatureEl.text(celsius);
+        $unitToggle.text() == 'C'
+            ? $unitToggle.text('F')
+            : $unitToggle.text('C');
     });
 });
